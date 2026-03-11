@@ -2,12 +2,14 @@ import * as readline from "node:readline";
 import {cd, ls, up} from "./navigation.js";
 import {ValidationError} from "./main.js";
 import {count} from "./commands/count.js";
+import {csvToJson} from "./commands/csvToJson.js";
 
 const commands = {
     'up': up,
     'cd': cd,
     'ls': ls,
     'count': count,
+    'csv-to-json': csvToJson,
 };
 
 export const repl = async (state) => {
@@ -23,10 +25,17 @@ export const repl = async (state) => {
     });
 
     rl.prompt();
+
     for await (const line of rl) {
-        const index = line.search(/\s/);
-        const command = line.substring(0, index);
-        const argsStr = line.substring(index + 1);
+        let command
+        let argsStr = ''
+        if (!/\s/.test(line)) {
+            command = line;
+        } else {
+            const index = line.search(/\s/);
+            command = line.substring(0, index);
+            argsStr = line.substring(index + 1)
+        }
 
         if (commands[command]) {
             try {
@@ -42,7 +51,7 @@ export const repl = async (state) => {
             }
             pwd();
             rl.prompt();
-        } else if (command === 'exit') {
+        } else if (command === '.exit') {
             break;
         } else {
             console.error('Invalid input');

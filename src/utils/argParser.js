@@ -53,18 +53,12 @@ const split = (str) => {
 
 // const args = '--name "John Doe" --path "/tmp/my file.txt" --flag';
 
-
 export const parse = (args, options) => {
     const argv = split(args);
     const { values } = parseArgs({
         args: argv,
         options,
         allowPositionals: true,
-        // options: {
-        //     name: { type: 'string' },
-        //     path: { type: 'string' },
-        //     flag: { type: 'boolean' }
-        // }
     });
     return values
 }
