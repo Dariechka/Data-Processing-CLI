@@ -1,11 +1,13 @@
 import * as readline from "node:readline";
 import {cd, ls, up} from "./navigation.js";
 import {ValidationError} from "./main.js";
+import {count} from "./commands/count.js";
 
 const commands = {
     'up': up,
     'cd': cd,
     'ls': ls,
+    'count': count,
 };
 
 export const repl = async (state) => {
@@ -22,13 +24,13 @@ export const repl = async (state) => {
 
     rl.prompt();
     for await (const line of rl) {
-        const input = line.split(/\s/);
-        const command = input[0];
-        const args = input.slice(1);
+        const index = line.search(/\s/);
+        const command = line.substring(0, index);
+        const argsStr = line.substring(index + 1);
 
         if (commands[command]) {
             try {
-                await commands[command](state, ...args);
+                await commands[command](state, argsStr);
             } catch (e) {
                 if (e instanceof ValidationError) {
                     console.error('Invalid input');
