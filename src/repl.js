@@ -3,6 +3,7 @@ import {cd, ls, up} from "./navigation.js";
 import {ValidationError} from "./main.js";
 import {count} from "./commands/count.js";
 import {csvToJson} from "./commands/csvToJson.js";
+import {jsonToCsv} from "./commands/jsonToCsv.js";
 
 const commands = {
     'up': up,
@@ -10,6 +11,7 @@ const commands = {
     'ls': ls,
     'count': count,
     'csv-to-json': csvToJson,
+    'json-to-csv': jsonToCsv
 };
 
 export const repl = async (state) => {
