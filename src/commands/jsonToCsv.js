@@ -49,10 +49,17 @@ export const jsonToCsv = async (state, argsStr) => {
 
     })
 
-    await pipeline(
-        reader,
-        transformer,
-        fs.createWriteStream(path.resolve(state.directory, args.output)),
-        Function.prototype,
-    );
+    const writer = fs.createWriteStream(path.resolve(state.directory, args.output));
+
+    await new Promise((resolve, reject) => {
+        writer.on('finish', resolve);
+        writer.on('error', reject);
+
+        pipeline(
+            reader,
+            transformer,
+            writer,
+            Function.prototype,
+        );
+    });
 }

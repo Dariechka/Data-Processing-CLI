@@ -5,6 +5,7 @@ import {count} from "./commands/count.js";
 import {csvToJson} from "./commands/csvToJson.js";
 import {jsonToCsv} from "./commands/jsonToCsv.js";
 import {encrypt} from "./commands/encrypt.js";
+import {decrypt} from "./commands/decrypt.js";
 
 const commands = {
     'up': up,
@@ -14,6 +15,7 @@ const commands = {
     'csv-to-json': csvToJson,
     'json-to-csv': jsonToCsv,
     'encrypt': encrypt,
+    'decrypt': decrypt,
 };
 
 export const repl = async (state) => {
