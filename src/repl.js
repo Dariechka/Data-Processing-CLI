@@ -4,6 +4,7 @@ import {ValidationError} from "./main.js";
 import {count} from "./commands/count.js";
 import {csvToJson} from "./commands/csvToJson.js";
 import {jsonToCsv} from "./commands/jsonToCsv.js";
+import {encrypt} from "./commands/encrypt.js";
 
 const commands = {
     'up': up,
@@ -11,7 +12,8 @@ const commands = {
     'ls': ls,
     'count': count,
     'csv-to-json': csvToJson,
-    'json-to-csv': jsonToCsv
+    'json-to-csv': jsonToCsv,
+    'encrypt': encrypt,
 };
 
 export const repl = async (state) => {
@@ -46,6 +48,7 @@ export const repl = async (state) => {
                 if (e instanceof ValidationError) {
                     console.error('Invalid input');
                 } else {
+                    console.error(e);
                     console.error('Operation failed');
                 }
                 rl.prompt();
