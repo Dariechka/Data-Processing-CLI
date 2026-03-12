@@ -47,9 +47,6 @@ export const count = async (state, argsStr) => {
             resolve();
         });
 
-        reader.on('error', () => {
-            console.error('Operation failed');
-            reject();
-        });
+        reader.on('error', reject);
     });
 }
