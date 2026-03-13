@@ -7,6 +7,7 @@ import {jsonToCsv} from "./commands/jsonToCsv.js";
 import {encrypt} from "./commands/encrypt.js";
 import {decrypt} from "./commands/decrypt.js";
 import {hash} from "./commands/hash.js";
+import {hashCompare} from "./commands/hashCompare.js";
 
 const commands = {
     'up': up,
@@ -18,6 +19,7 @@ const commands = {
     'encrypt': encrypt,
     'decrypt': decrypt,
     'hash': hash,
+    'hash-compare': hashCompare,
 };
 
 export const repl = async (state) => {
