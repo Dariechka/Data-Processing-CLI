@@ -6,6 +6,7 @@ import {csvToJson} from "./commands/csvToJson.js";
 import {jsonToCsv} from "./commands/jsonToCsv.js";
 import {encrypt} from "./commands/encrypt.js";
 import {decrypt} from "./commands/decrypt.js";
+import {hash} from "./commands/hash.js";
 
 const commands = {
     'up': up,
@@ -16,6 +17,7 @@ const commands = {
     'json-to-csv': jsonToCsv,
     'encrypt': encrypt,
     'decrypt': decrypt,
+    'hash': hash,
 };
 
 export const repl = async (state) => {
@@ -50,7 +52,6 @@ export const repl = async (state) => {
                 if (e instanceof ValidationError) {
                     console.error('Invalid input');
                 } else {
-                    console.error(e);
                     console.error('Operation failed');
                 }
                 rl.prompt();
