@@ -8,6 +8,7 @@ import {encrypt} from "./commands/encrypt.js";
 import {decrypt} from "./commands/decrypt.js";
 import {hash} from "./commands/hash.js";
 import {hashCompare} from "./commands/hashCompare.js";
+import {logStats} from "./commands/logStats.js";
 
 const commands = {
     'up': up,
@@ -20,6 +21,7 @@ const commands = {
     'decrypt': decrypt,
     'hash': hash,
     'hash-compare': hashCompare,
+    'log-stats': logStats
 };
 
 export const repl = async (state) => {
@@ -51,6 +53,7 @@ export const repl = async (state) => {
             try {
                 await commands[command](state, argsStr);
             } catch (e) {
+                console.error(e);
                 if (e instanceof ValidationError) {
                     console.error('Invalid input');
                 } else {
